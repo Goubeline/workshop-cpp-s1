@@ -1,5 +1,7 @@
 #include <sil/sil.hpp>
 
+#include "utils/utils.hpp"
+
 sil::Image green_only(sil::Image image)
 {
     for (glm::vec3& color : image.pixels())
@@ -35,7 +37,7 @@ sil::Image black_white(sil::Image image)
 {
     for (glm::vec3& color : image.pixels())
     {
-        color = glm::vec3{(0.2126f*color.r + 0.7152f*color.g + 0.0722f*color.b)};
+        color = glm::vec3{brightness(color)};
     }
     return image;
 }
