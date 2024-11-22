@@ -54,6 +54,6 @@ int main()
     // vortex(logo).save("output/vortex.png");
     
     // convolution
-    linear_convolution(logo, 3).save("output/test.png");
+    // linear_convolution(logo, 100).save("output/test.png");
     return 1;
 }

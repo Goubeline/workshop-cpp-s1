@@ -27,8 +27,8 @@ sil::Image canal_swap(sil::Image image)
     for (glm::vec3& color : image.pixels())
     {
         buffer = color.r;
-        color.r = color.g;
-        color.g = buffer;
+        color.r = color.b;
+        color.b = buffer;
     }
     return image;
 }

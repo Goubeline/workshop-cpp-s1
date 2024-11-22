@@ -55,11 +55,11 @@ sil::Image mirror(sil::Image image)
 sil::Image rotate90(sil::Image image)
 {
     sil::Image copie(image.height(), image.width());
-    for (int x{0}; x < copie.width(); x++)
+    for (int x{0}; x < image.width(); x++)
     {
-        for (int y{0}; y < copie.height(); y++)
+        for (int y{0}; y < image.height(); y++)
         {
-            copie.pixel(x, y) = image.pixel(y, x);
+            copie.pixel(y, image.width() - x - 1) = image.pixel(image.width() - x - 1, y);
         }
     }
     return mirror(copie);
