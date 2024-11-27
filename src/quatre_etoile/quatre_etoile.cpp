@@ -33,7 +33,7 @@ sil::Image mandelbrot()
     return image;
 }
 
-void rgb_to_hsl(glm::vec3& color)
+glm::vec3 rgb_to_hsl(glm::vec3 color)
 {
     float r = color.r;
     float g = color.g;
@@ -70,6 +70,7 @@ void rgb_to_hsl(glm::vec3& color)
     color.r = h;
     color.g = s;
     color.b = l;
+    return color;
 }
 
 float hueToRgb(float p, float q, float t)
@@ -87,13 +88,14 @@ float hueToRgb(float p, float q, float t)
     return p;
 }
 
-void hsl_to_rgb(glm::vec3& color)
+glm::vec3 hsl_to_rgb(glm::vec3 color)
 {
     float q = (color[2] < 0.5) ? color[2] * (1 + color[1]) : color[2] + color[1] - color[2] * color[1];
     float p = 2 * color[2] - q;
     color.g = hueToRgb(p, q, color[0]);
     color.b = hueToRgb(p, q, color[0] - 1/3);
     color.r = hueToRgb(p, q, color[0] + 1/3);
+    return color;
 }
 
 
@@ -118,11 +120,13 @@ sil::Image normalize_histogram(sil::Image image)
         }
     }
 
-    for (size_t i = 0; i < image.pixels().size(); i++)
+    glm::vec3 color;
+    for (glm::vec3 pixel : image.pixels())
     {
-        image.pixels()[i] = (image.pixels()[i] - lumi_min) * (1 / (lumi_max - lumi_min));
+        pixel = (pixel - lumi_min) * (1 / (lumi_max - lumi_min));
+        // color = rgb_to_hsl(pixel);
         // color[2] = (color[2] - lumi_min) + (lumi_max - lumi_min) / 2;
-        // hsl_to_rgb(color);
+        // pixel = hsl_to_rgb(color);
     }
     return image;
 }

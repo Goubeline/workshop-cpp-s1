@@ -68,7 +68,7 @@ sil::Image sort_pixels(sil::Image image)
     int nbpixels = image.height() * image.width();
     for(int i = 0; i < nbpixels - 70; i++)
     {
-        if (!random_int(0, 140))
+        if (!random_int(0, 70))
         {
             brightness_sort(image, i, i + 70);
             i += 70;
